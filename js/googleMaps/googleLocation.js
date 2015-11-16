@@ -60,7 +60,7 @@ var googleLocation = (function ($, logger, view, network, ajax) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                 	latitude = position.coords.latitude;
                 	longitude = position.coords.longitude;
-                    view.showPopup('Latitude: ' + position.coords.latitude  + 'Longitude: ' + position.coords.longitude)
+                    //view.showPopup('Latitude: ' + position.coords.latitude  + 'Longitude: ' + position.coords.longitude)
                 	console.log('Latitude: ' + position.coords.latitude  + 'Longitude: ' + position.coords.longitude);
                    
                     
@@ -72,32 +72,30 @@ var googleLocation = (function ($, logger, view, network, ajax) {
                     	 mapTypeId: google.maps.MapTypeId.HYBRID
                     });
                     
+
+                   /* window.setTimeout(function() {
+                        var markers = new google.maps.Marker({
+                          position: new google.maps.LatLng(latitude, longitude),
+                          map: map,
+                          title: 'Your Position',
+                          animation: google.maps.Animation.DROP
+                        });
+                      }, 200);*/
                     
                     // add marker
                     var marker = new google.maps.Marker({
-                        position: 
-                        {
-                        	lat: latitude, 
-                        	lon: longitude
-                        },
+                        position: new google.maps.LatLng(latitude, longitude),
                         map: map,
                         title: 'Your Position'
+                        //animation: google.maps.Animation.DROP
                       });
-                    
+                   // marker.setAnimation(google.maps.Animation.DROP);
                     
                     
                 }, function(error) {
                     console.error('GPS error occurred');
                 });
                 
-                
-               /*that.createMapForGivenContainer("map_canvas", {
-                    zoom: 6,
-                    lat: 37.3359,
-                    lon: 126.5840,
-                    streetViewControl: false,
-                    mapTypeId: google.maps.MapTypeId.HYBRID
-                });*/
             });
             
             $('#seoul').live('pageshow', function () {
@@ -110,6 +108,11 @@ var googleLocation = (function ($, logger, view, network, ajax) {
                     streetViewControl: false,
                     mapTypeId: google.maps.MapTypeId.HYBRID
                 });
+                
+                
+                
+                
+                
             });
             $('#searchForPlaces').live('pageshow', function () {
                 internetConnectionCheck();
